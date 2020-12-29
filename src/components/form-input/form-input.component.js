@@ -5,7 +5,7 @@ import "./form-input.styles.scss";
 const FormInput = ({ handleChange, label, ...otherProps }) => (
   <div className='group'>
     <input 
-      autocomplete='off'
+      autoComplete='off'
       className='form-input' 
       onChange={handleChange} 
       {...otherProps} 
