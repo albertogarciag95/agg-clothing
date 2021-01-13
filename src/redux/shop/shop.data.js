@@ -1,3 +1,6 @@
+// data normalization : instead of SHOP_DATA being an array of objects 
+// (maybe it is expensive to search if array has a lot o items)
+// we normalize it into an object or hash table
 const SHOP_DATA = {
   hats: {
     id: 1,
