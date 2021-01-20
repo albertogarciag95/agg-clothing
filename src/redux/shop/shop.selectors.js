@@ -10,12 +10,12 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collection => Object.values(collection)
+  collections => collections ? Object.values(collections) : []
 )
 
-export const selectCollection = urlRouteName => memoize(
+export const selectCollection = collectionUrlParam => memoize(
   createSelector(
     [selectCollections],
-    collections => collections[urlRouteName]
+    collections => collections ? collections[collectionUrlParam] : null
   )
 );
