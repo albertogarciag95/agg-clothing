@@ -1,7 +1,7 @@
 import {
   FETCH_COLLECTIONS_SUCCESS,
   FETCH_COLLECTIONS_FAILURE
-} from './shop.types';
+} from './shop.action.types';
 
 const INITIAL_STATE = {
   collections: null,
