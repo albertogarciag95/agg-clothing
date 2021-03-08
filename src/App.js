@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import './App.css';
 
@@ -14,34 +14,24 @@ import Header from "./components/header/header.component";
 import { selectCurrentUser } from './redux/user/user.selectors';
 import { checkUserSession } from './redux/user/user.actions';
 
-class App extends React.Component {
-
-  unsubscribeFromAuth = null;
-
-  componentDidMount() {
-    const { checkUserSession } = this.props;
-
-    checkUserSession()
-  }
- 
-  componentWillUnmount() {
-    this.unsubscribeFromAuth();
-  }
+const App = ({ checkUserSession, currentUser }) => {
   
-  render () {
-    return (
-      <div>
-        <Header />
-        <Switch>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route exact path='/signIn' render={() => 
-            this.props.currentUser ? <Redirect to='/' /> : <SignInAndSignUp />} />
-          <Route exact path='/checkout' component={CheckoutPage} />
-        </Switch>
-      </div>
-    );
-  }
+  useEffect(() => {
+    checkUserSession();
+  }, [checkUserSession])
+ 
+  return (
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/shop' component={ShopPage} />
+        <Route exact path='/signIn' render={() => 
+          currentUser ? <Redirect to='/' /> : <SignInAndSignUp />} />
+        <Route exact path='/checkout' component={CheckoutPage} />
+      </Switch>
+    </div>
+  );
 }
 // without reselect: currentUser is a string (primitive), 
 // so every state change won't actually re-render App component if currentUser remains the same value
